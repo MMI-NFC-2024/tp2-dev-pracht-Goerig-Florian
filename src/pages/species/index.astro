@@ -2,11 +2,19 @@
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout>
-  <h1 class="text-2xl">Espèces</h1>
-  <ul>
-    <li><a href="/species/Adelie">Adelie</a></li>
-    <li><a href="/species/Gentoo">Gentoo</a></li>
-    <li><a href="/species/Chinstrap">Chinstrap</a></li>
+<Layout title="Espèces — TP2">
+  <h1>Espèces de pingouins</h1>
+
+  <!-- Petit texte repris/adapté du TP1 -->
+  <p class="card" style="margin-bottom:1rem;">
+    Cette section reprend la mise en forme du TP1 et présente les graphiques par
+    espèce. Naviguez entre les sous-pages pour comparer visuellement les
+    mesures.
+  </p>
+
+  <ul class="links">
+    <li><a href="/species/Adelie">🐧 Adelie</a></li>
+    <li><a href="/species/Gentoo">🐧 Gentoo</a></li>
+    <li><a href="/species/Chinstrap">🐧 Chinstrap</a></li>
   </ul>
 </Layout>
