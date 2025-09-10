@@ -6,24 +6,20 @@ import GraphicSpecies from "../../components/GraphicSpecies.astro";
 <Layout>
   <h1>Espèces — Page unique avec ancres (slider)</h1>
 
-  <!-- Menu à ancres -->
-  <nav class="links" id="anchors-nav" aria-label="Navigation par espèce">
-    <a href="#adelie">Adelie</a>
+  <nav class="nav-pills" id="anchors-nav" aria-label="Navigation par espèce">
+    <a href="#adelie" class="is-active">Adelie</a>
     <a href="#gentoo">Gentoo</a>
     <a href="#chinstrap">Chinstrap</a>
   </nav>
 
-  <!-- Slider horizontal CSS -->
   <div class="slider" id="slider">
-    <section class="slide" id="adelie" aria-label="Adelie">
+    <section class="slide" id="adelie">
       <GraphicSpecies species="Adelie" title="Adelie" />
     </section>
-
-    <section class="slide" id="gentoo" aria-label="Gentoo">
+    <section class="slide" id="gentoo">
       <GraphicSpecies species="Gentoo" title="Gentoo" />
     </section>
-
-    <section class="slide" id="chinstrap" aria-label="Chinstrap">
+    <section class="slide" id="chinstrap">
       <GraphicSpecies species="Chinstrap" title="Chinstrap" />
     </section>
   </div>
@@ -33,10 +29,9 @@ import GraphicSpecies from "../../components/GraphicSpecies.astro";
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
       gap: 1rem;
       padding-bottom: 0.5rem;
+      scroll-behavior: smooth;
     }
     .slide {
       flex: 0 0 100%;
@@ -46,9 +41,6 @@ import GraphicSpecies from "../../components/GraphicSpecies.astro";
       border: 1px solid #eee;
       border-radius: 12px;
       padding: 1rem;
-    }
-    .slide h2 {
-      margin: 0 0 0.5rem;
     }
   </style>
 
@@ -66,6 +58,9 @@ import GraphicSpecies from "../../components/GraphicSpecies.astro";
         inline: "start",
         block: "nearest",
       });
+      for (const link of nav.querySelectorAll("a"))
+        link.classList.remove("is-active");
+      a.classList.add("is-active");
       history.replaceState(null, "", "#" + id);
     });
   </script>
