@@ -6,10 +6,23 @@ import GraphicSpecies from "../../components/GraphicSpecies.astro";
 <Layout title="Gentoo — Espèces">
   <h1>Espèce : Gentoo</h1>
 
-  <nav class="links" aria-label="Espèces">
-    <a href="/species/Adelie">Adelie</a>
-    <a href="/species/Gentoo">Gentoo</a>
-    <a href="/species/Chinstrap">Chinstrap</a>
+  <nav class="nav-pills" aria-label="Espèces">
+    <a
+      href="/species/Adelie"
+      aria-current={Astro.url.pathname.endsWith("/Adelie") ? "page" : undefined}
+      >Adelie</a
+    >
+    <a
+      href="/species/Gentoo"
+      aria-current={Astro.url.pathname.endsWith("/Gentoo") ? "page" : undefined}
+      >Gentoo</a
+    >
+    <a
+      href="/species/Chinstrap"
+      aria-current={Astro.url.pathname.endsWith("/Chinstrap")
+        ? "page"
+        : undefined}>Chinstrap</a
+    >
   </nav>
 
   <GraphicSpecies species="Gentoo" />
