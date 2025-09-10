@@ -1,6 +1,5 @@
 ---
-const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } =
-  Astro.props;
+const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
 ---
 
 <html lang="fr">
@@ -11,13 +10,12 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
     <style>
       :root {
         --max: 980px;
-        --gray: #e5e7eb;
       }
       * {
         box-sizing: border-box;
       }
 
-      /* 1) Reset global des liens */
+      /* 🔒 Reset global des liens: plus de soulignement/couleur navigateur */
       a,
       a:link,
       a:visited {
@@ -54,7 +52,6 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
       main {
         min-height: 65vh;
       }
-
       h1 {
         font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
         margin: 0 0 1rem;
@@ -63,6 +60,9 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
         margin: 0 0 0.5rem;
       }
 
+      /* === Styles repris/adaptés du TP1 === */
+
+      /* Cartes */
       .card {
         background: #fff;
         border: 1px solid #eee;
@@ -71,86 +71,15 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
       }
 
-      /* 2) Boutons réutilisables (pills) */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.55rem 0.95rem;
-        line-height: 1;
-        border: 1px solid var(--gray);
-        border-radius: 999px;
-        background: #fff;
-        color: #111;
-        font-weight: 600;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        transition:
-          background 0.15s,
-          border-color 0.15s,
-          transform 0.06s;
-      }
-      .btn:hover,
-      .btn:focus-visible {
-        background: #f4f6f8;
-        border-color: #dcdfe3;
-        outline: none;
-        transform: translateY(-1px);
-      }
-      .btn.primary {
-        background: #2563eb;
-        border-color: #1d4ed8;
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-      }
-      .btn.primary:hover,
-      .btn.primary:focus-visible {
-        background: #1d4ed8;
-        border-color: #1e40af;
-      }
-
-      /* 3) Listes de liens → rangées de boutons */
-      ul.links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-      }
-      ul.links li {
-        margin: 0;
-      }
-      ul.links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.55rem 0.95rem;
-        border: 1px solid var(--gray);
-        border-radius: 999px;
-        background: #fff;
-        color: #111;
-        font-weight: 600;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        transition:
-          background 0.15s,
-          border-color 0.15s,
-          transform 0.06s;
-      }
-      ul.links a:hover,
-      ul.links a:focus-visible {
-        background: #f4f6f8;
-        border-color: #dcdfe3;
-        outline: none;
-        transform: translateY(-1px);
-      }
-
-      /* 4) Nav du header → boutons light automatiquement */
+      /* Onglets du header */
       header nav {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
       }
       header nav a {
+        display: inline-flex;
+        align-items: center;
         padding: 0.45rem 0.8rem;
         border: 1px solid transparent;
         border-radius: 999px;
@@ -161,6 +90,30 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
       }
       header nav a:hover {
         background: #f4f6f8;
+      }
+
+      /* ✅ Composant réutilisable: nav-pills (même style que le header) */
+      .nav-pills {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 0 0 0.75rem;
+        padding: 0;
+      }
+      .nav-pills a {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 0.8rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+      }
+      .nav-pills a:hover {
+        background: #f4f6f8;
+      }
+      .nav-pills a[aria-current="page"],
+      .nav-pills a.is-active {
+        border-color: #e5e7eb;
+        background: #fff;
       }
 
       /* Accessibilité focus */
@@ -168,68 +121,6 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
         outline: 2px solid #6aa7ff;
         outline-offset: 2px;
         border-radius: 6px;
-      }
-      /* Reset global: plus de souligné ni de violet */
-      a,
-      a:link,
-      a:visited {
-        text-decoration: none !important;
-        color: inherit !important;
-      }
-
-      /* Boutons “pills” réutilisables pour les listes de liens */
-      ul.links {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-      }
-      ul.links li {
-        margin: 0;
-      }
-      ul.links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.55rem 0.95rem;
-        border: 1px solid #e5e7eb;
-        border-radius: 999px;
-        background: #fff;
-        color: #111;
-        font-weight: 600;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        transition:
-          background 0.15s,
-          border-color 0.15s,
-          transform 0.06s;
-      }
-      ul.links a:hover,
-      ul.links a:focus-visible {
-        background: #f4f6f8;
-        border-color: #dcdfe3;
-        outline: none;
-        transform: translateY(-1px);
-      }
-
-      /* Header nav → boutons light */
-      header nav {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-      header nav a {
-        padding: 0.45rem 0.8rem;
-        border: 1px solid transparent;
-        border-radius: 999px;
-      }
-      header nav a[aria-current="page"] {
-        border-color: #e5e7eb;
-        background: #fff;
-      }
-      header nav a:hover {
-        background: #f4f6f8;
       }
     </style>
   </head>
@@ -240,11 +131,7 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
         <div
           style="display:flex; gap:1rem; align-items:center; justify-content:space-between;"
         >
-          <!-- Tu peux remplacer ce titre par celui de ton TP1 si tu veux -->
-          <a href="/" style="font-weight:800;"
-            >R312-TP2 Florian Goerig MMi2 C1 – Plot Demos</a
-          >
-
+          <a href="/" style="font-weight:800;">TP2 – Plot Demos</a>
           <nav>
             <a
               href="/"
@@ -283,7 +170,6 @@ const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } 
         class="wrap"
         style="display:flex; justify-content:space-between; align-items:center;"
       >
-        <!-- Mention claire de la reprise du TP1 -->
         <small
           >© {new Date().getFullYear()} — Base de styles <b>reprise du TP1</b
           ></small
