@@ -1,5 +1,6 @@
 ---
-const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
+const { title = "R312-TP2 Florian Goerig MMi2 C1 – Observable Plot + Astro" } =
+  Astro.props;
 ---
 
 <html lang="fr">
@@ -10,10 +11,13 @@ const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
     <style>
       :root {
         --max: 980px;
+        --gray: #e5e7eb;
       }
       * {
         box-sizing: border-box;
       }
+
+      /* 1) Reset global des liens */
       a,
       a:link,
       a:visited {
@@ -59,15 +63,125 @@ const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
         margin: 0 0 0.5rem;
       }
 
-      /* === Styles repris/adaptés du TP1 ===
-         (Colle ici d’éventuelles règles de ton TP1 si tu veux les réutiliser à l’identique)
-      */
+      .card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      }
 
-      /* Boutons "pills" utilisés partout pour les liens de navigation */
+      /* 2) Boutons réutilisables (pills) */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        line-height: 1;
+        border: 1px solid var(--gray);
+        border-radius: 999px;
+        background: #fff;
+        color: #111;
+        font-weight: 600;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition:
+          background 0.15s,
+          border-color 0.15s,
+          transform 0.06s;
+      }
+      .btn:hover,
+      .btn:focus-visible {
+        background: #f4f6f8;
+        border-color: #dcdfe3;
+        outline: none;
+        transform: translateY(-1px);
+      }
+      .btn.primary {
+        background: #2563eb;
+        border-color: #1d4ed8;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      }
+      .btn.primary:hover,
+      .btn.primary:focus-visible {
+        background: #1d4ed8;
+        border-color: #1e40af;
+      }
+
+      /* 3) Listes de liens → rangées de boutons */
       ul.links {
         list-style: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      ul.links li {
+        margin: 0;
+      }
+      ul.links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        border: 1px solid var(--gray);
+        border-radius: 999px;
+        background: #fff;
+        color: #111;
+        font-weight: 600;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition:
+          background 0.15s,
+          border-color 0.15s,
+          transform 0.06s;
+      }
+      ul.links a:hover,
+      ul.links a:focus-visible {
+        background: #f4f6f8;
+        border-color: #dcdfe3;
+        outline: none;
+        transform: translateY(-1px);
+      }
+
+      /* 4) Nav du header → boutons light automatiquement */
+      header nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      header nav a {
+        padding: 0.45rem 0.8rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+      }
+      header nav a[aria-current="page"] {
+        border-color: #e5e7eb;
+        background: #fff;
+      }
+      header nav a:hover {
+        background: #f4f6f8;
+      }
+
+      /* Accessibilité focus */
+      a:focus-visible {
+        outline: 2px solid #6aa7ff;
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+      /* Reset global: plus de souligné ni de violet */
+      a,
+      a:link,
+      a:visited {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+
+      /* Boutons “pills” réutilisables pour les listes de liens */
+      ul.links {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.6rem;
@@ -99,7 +213,7 @@ const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
         transform: translateY(-1px);
       }
 
-      /* Nav du header en boutons light */
+      /* Header nav → boutons light */
       header nav {
         display: flex;
         gap: 0.5rem;
@@ -117,20 +231,6 @@ const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
       header nav a:hover {
         background: #f4f6f8;
       }
-
-      .card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-      }
-
-      a:focus-visible {
-        outline: 2px solid #6aa7ff;
-        outline-offset: 2px;
-        border-radius: 6px;
-      }
     </style>
   </head>
 
@@ -141,7 +241,9 @@ const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
           style="display:flex; gap:1rem; align-items:center; justify-content:space-between;"
         >
           <!-- Tu peux remplacer ce titre par celui de ton TP1 si tu veux -->
-          <a href="/" style="font-weight:800;">TP2 – Plot Demos</a>
+          <a href="/" style="font-weight:800;"
+            >R312-TP2 Florian Goerig MMi2 C1 – Plot Demos</a
+          >
 
           <nav>
             <a

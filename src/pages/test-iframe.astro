@@ -6,11 +6,11 @@ import Layout from "../layouts/Layout.astro";
   <h1>Test IFRAME — Espèces de pingouins</h1>
 
   <!-- Menu : chaque lien a target="speciesFrame" -->
-  <p style="display:flex; gap:.5rem; flex-wrap:wrap;">
-    <a href="/species/Adelie" target="speciesFrame">Adelie</a>
-    <a href="/species/Gentoo" target="speciesFrame">Gentoo</a>
-    <a href="/species/Chinstrap" target="speciesFrame">Chinstrap</a>
-  </p>
+  <ul class="links">
+    <li><a href="/species/Adelie" target="speciesFrame">Adelie</a></li>
+    <li><a href="/species/Gentoo" target="speciesFrame">Gentoo</a></li>
+    <li><a href="/species/Chinstrap" target="speciesFrame">Chinstrap</a></li>
+  </ul>
 
   <div style="border:1px solid #eee; border-radius:12px; overflow:hidden;">
     <!-- IFRAME nommée, charge Adelie par défaut -->
