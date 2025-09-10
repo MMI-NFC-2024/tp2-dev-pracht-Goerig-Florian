@@ -1,21 +1,33 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
 import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
 ---
 
-<Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+<Layout title="Accueil — TP2 Observable Plot">
+  <h1>Exemples de graphiques</h1>
+
+  <!-- Contenu réutilisé/adapté du TP1 -->
+  <p class="card" style="margin-bottom:1rem;">
+    Ce site <strong
+      >réutilise la base de styles et une partie du contenu du TP1</strong
+    >
+    (structure, navigation, ton éditorial). Ici, on décline ces éléments pour expérimenter
+    trois intégrations de graphiques avec Observable Plot.
+  </p>
+
+  <ul class="links" style="margin-bottom:1rem;">
+    <li><a href="/species">📚 Espèces (3 pages dédiées)</a></li>
+    <li><a href="/test-iframe">🧪 Test IFRAME</a></li>
+    <li><a href="/species/anchors">🔗 Page à ancres (slider)</a></li>
+  </ul>
+
+  <div class="card">
+    <strong>Sources :</strong>
+    <ul>
+      <li>
+        Dataset pingouins (Palmer Penguins) — <code
+          >src/assets/penguins.json</code>
+      </li>
+      <li>Observable Plot — Getting Started</li>
+    </ul>
+  </div>
 </Layout>
