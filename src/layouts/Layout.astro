@@ -1,26 +1,199 @@
 ---
-import "../styles/global.css";
+const { title = "TP2 – Observable Plot + Astro" } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{title}</title>
+    <style>
+      :root {
+        --max: 980px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      a,
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          "Helvetica Neue",
+          Arial;
+        background: #fafafa;
+        color: #111;
+      }
+
+      header {
+        border-bottom: 1px solid #eee;
+        background: #fff;
+      }
+      footer {
+        border-top: 1px solid #eee;
+        background: #fff;
+      }
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      main {
+        min-height: 65vh;
+      }
+
+      h1 {
+        font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+        margin: 0 0 1rem;
+      }
+      h2 {
+        margin: 0 0 0.5rem;
+      }
+
+      /* === Styles repris/adaptés du TP1 ===
+         (Colle ici d’éventuelles règles de ton TP1 si tu veux les réutiliser à l’identique)
+      */
+
+      /* Boutons "pills" utilisés partout pour les liens de navigation */
+      ul.links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      ul.links li {
+        margin: 0;
+      }
+      ul.links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 999px;
+        background: #fff;
+        color: #111;
+        font-weight: 600;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition:
+          background 0.15s,
+          border-color 0.15s,
+          transform 0.06s;
+      }
+      ul.links a:hover,
+      ul.links a:focus-visible {
+        background: #f4f6f8;
+        border-color: #dcdfe3;
+        outline: none;
+        transform: translateY(-1px);
+      }
+
+      /* Nav du header en boutons light */
+      header nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      header nav a {
+        padding: 0.45rem 0.8rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+      }
+      header nav a[aria-current="page"] {
+        border-color: #e5e7eb;
+        background: #fff;
+      }
+      header nav a:hover {
+        background: #f4f6f8;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      }
+
+      a:focus-visible {
+        outline: 2px solid #6aa7ff;
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+    </style>
   </head>
+
   <body>
-    <slot />
+    <header>
+      <div class="wrap">
+        <div
+          style="display:flex; gap:1rem; align-items:center; justify-content:space-between;"
+        >
+          <!-- Tu peux remplacer ce titre par celui de ton TP1 si tu veux -->
+          <a href="/" style="font-weight:800;">TP2 – Plot Demos</a>
+
+          <nav>
+            <a
+              href="/"
+              aria-current={Astro.url.pathname === "/" ? "page" : undefined}
+              >Accueil</a
+            >
+            <a
+              href="/species"
+              aria-current={Astro.url.pathname.startsWith("/species")
+                ? "page"
+                : undefined}>Espèces</a
+            >
+            <a
+              href="/test-iframe"
+              aria-current={Astro.url.pathname.startsWith("/test-iframe")
+                ? "page"
+                : undefined}>IFRAME</a
+            >
+            <a
+              href="/species/anchors"
+              aria-current={Astro.url.pathname.startsWith("/species/anchors")
+                ? "page"
+                : undefined}>Ancres</a
+            >
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <slot />
+    </main>
+
+    <footer>
+      <div
+        class="wrap"
+        style="display:flex; justify-content:space-between; align-items:center;"
+      >
+        <!-- Mention claire de la reprise du TP1 -->
+        <small
+          >© {new Date().getFullYear()} — Base de styles <b>reprise du TP1</b
+          ></small
+        >
+        <small
+          ><a
+            class="card"
+            href="https://observablehq.com/plot/getting-started"
+            style="padding:.4rem .7rem;">Doc Plot</a
+          ></small
+        >
+      </div>
+    </footer>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
